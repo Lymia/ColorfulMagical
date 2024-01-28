@@ -32,7 +32,7 @@
  * THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package moe.lymia.cmom.contrib.swingx;
+package moe.lymia.contrib.swingx;
 
 import java.awt.Composite;
 import java.awt.CompositeContext;

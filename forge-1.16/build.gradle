@@ -1,8 +1,11 @@
-archivesBaseName = "${project.archives_base_name}-Forge"
+apply plugin: "dev.architectury.loom"
+apply plugin: "architectury-plugin"
 
+archivesBaseName = "${project.archives_base_name}-Forge"
 mainClassName = "moe.lymia.cmom.CmomCli"
 
 architectury {
+	minecraft = project.minecraft_version
     platformSetupLoomIde()
     forge()
 }
@@ -15,7 +18,11 @@ loom {
 }
 
 dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
     forge "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    shadow(project(path: ":common")) { transitive false }
 }
 
 repositories {
@@ -33,4 +40,13 @@ processResources {
     filesMatching("META-INF/mods.toml") {
         expand "version": project.version
     }
+}
+
+shadowJar {
+	configurations = [project.configurations.shadow]
+}
+
+remapJar {
+	input.set shadowJar.archiveFile
+	dependsOn shadowJar
 }

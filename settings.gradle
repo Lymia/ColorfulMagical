@@ -12,4 +12,4 @@ pluginManagement {
 
 }
 
-include "forge-1.16"
+include "common", "forge-1.16"

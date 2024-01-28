@@ -1,6 +1,6 @@
 package moe.lymia.cmom.image;
 
-import moe.lymia.cmom.contrib.swingx.BlendComposite;
+import moe.lymia.contrib.swingx.BlendComposite;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
