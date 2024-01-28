@@ -1,6 +1,7 @@
 plugins {
 	id "architectury-plugin" version "3.4.151"
 	id 'dev.architectury.loom' version '1.4.380' apply false
+	id 'org.ajoberstar.grgit' version '5.0.0'
 }
 
 architectury {
@@ -19,11 +20,12 @@ subprojects {
 allprojects {
 	apply plugin: "java"
 	apply plugin: "architectury-plugin"
+	apply plugin: 'application'
 
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
 
-	version = "${project.mod_version}+mc${project.minecraft_version}"
+	version = "${project.mod_version}${getVersionMetadata()}+mc${project.minecraft_version}"
 	group = project.maven_group
 
 	repositories {
@@ -39,4 +41,24 @@ allprojects {
 	java {
 		withSourcesJar()
 	}
+}
+
+def getVersionMetadata() {
+	// CI builds only
+	if (grgit != null) {
+		def head = grgit.head()
+
+		if (grgit.tag.list().findAll { it.commit == head}.isEmpty()) {
+			def id = head.abbreviatedId
+			if (!grgit.status().clean) {
+				id += ".dirty"
+			}
+			return "-r${id}"
+		} else {
+			return ""
+		}
+	}
+
+	// No tracking information could be found about the build
+	return "-unknown"
 }

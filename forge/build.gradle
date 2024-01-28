@@ -1,5 +1,7 @@
 archivesBaseName = "${project.archives_base_name}-Forge"
 
+mainClassName = "moe.lymia.cmom.CmomCli"
+
 architectury {
     platformSetupLoomIde()
     forge()

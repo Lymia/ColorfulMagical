@@ -4,20 +4,20 @@ issueTrackerURL = "https://github.com/Lymia/SimpleCaveBiomes/issues"
 license = "LGPL-3.0"
 
 [[mods]]
-    modId = "smom"
+    modId = "cmom"
     version = "${version}"
     authors = "Lymia Kanokawa"
     displayName = "Colorful ☆ Magical ☆ Ore ☆ Mod!"
     description = '''Yet another ore unification mod.'''
 
-[[dependencies.smom]]
+[[dependencies.cmom]]
     modId = "forge"
     mandatory = true
     versionRange = "[36,)"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.smom]]
+[[dependencies.cmom]]
     modId = "minecraft"
     mandatory = true
     versionRange = "[1.16.5,1.17)"
