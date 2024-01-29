@@ -6,7 +6,7 @@ import json
 from gimpformats.GimpLayer import GimpLayer
 from gimpformats.gimpXcfDocument import GimpDocument
 
-project = GimpDocument("res/ores.xcf")
+project = GimpDocument("scripts/layers.xcf")
 project.forceFullyLoaded()
 
 def layer_children(base_layer: GimpLayer):
