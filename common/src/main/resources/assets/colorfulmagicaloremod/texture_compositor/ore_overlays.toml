@@ -1,0 +1,385 @@
+out_name = "ore_overlays.png"
+image_size = [ 256, 64,]
+[[ores]]
+name = "arcane"
+[[ores.layers]]
+name = "Ore #12"
+bound = [ 0, 0, 16, 16,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #12"
+bound = [ 16, 0, 32, 16,]
+blend_mode = "Normal"
+
+
+[[ores]]
+name = "coal"
+[[ores.layers]]
+name = "Ore #3"
+bound = [ 32, 0, 48, 16,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #3"
+bound = [ 48, 0, 64, 16,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #20"
+bound = [ 64, 0, 80, 16,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #21"
+bound = [ 80, 0, 96, 16,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "cobalt"
+[[ores.layers]]
+name = "Ore #16"
+bound = [ 96, 0, 112, 16,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore Remanants copy"
+bound = [ 112, 0, 128, 16,]
+blend_mode = "Hard light"
+
+[[ores.layers]]
+name = "Ore Remanants"
+bound = [ 128, 0, 144, 16,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #16"
+bound = [ 144, 0, 160, 16,]
+blend_mode = "Soft light"
+
+
+[[ores]]
+name = "copper"
+[[ores.layers]]
+name = "Ore #4"
+bound = [ 160, 0, 176, 16,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #4"
+bound = [ 176, 0, 192, 16,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Smoothing"
+bound = [ 192, 0, 208, 16,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "diamond"
+[[ores.layers]]
+name = "Ore #2"
+bound = [ 208, 0, 224, 16,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #2"
+bound = [ 224, 0, 240, 16,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #17"
+bound = [ 240, 0, 256, 16,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "emerald"
+[[ores.layers]]
+name = "Ore #6"
+bound = [ 0, 16, 16, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Glow #2"
+bound = [ 16, 16, 32, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #5"
+bound = [ 32, 16, 48, 32,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #18"
+bound = [ 48, 16, 64, 32,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "fluorite"
+[[ores.layers]]
+name = "Ore #11"
+bound = [ 64, 16, 80, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #11"
+bound = [ 80, 16, 96, 32,]
+blend_mode = "Normal"
+
+
+[[ores]]
+name = "geode"
+[[ores.layers]]
+name = "Ore #21"
+bound = [ 96, 16, 112, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #27"
+bound = [ 112, 16, 128, 32,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Pasted Layer #3"
+bound = [ 128, 16, 144, 32,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "gold"
+[[ores.layers]]
+name = "Ore #1"
+bound = [ 144, 16, 160, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore #17"
+bound = [ 160, 16, 176, 32,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #1"
+bound = [ 176, 16, 192, 32,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Pasted Layer #6"
+bound = [ 192, 16, 208, 32,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "iron"
+[[ores.layers]]
+name = "Ore"
+bound = [ 208, 16, 224, 32,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore copy"
+bound = [ 224, 16, 240, 32,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading"
+bound = [ 240, 16, 256, 32,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Smoothing copy"
+bound = [ 0, 32, 16, 48,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "lapis"
+[[ores.layers]]
+name = "Ore #18"
+bound = [ 16, 32, 32, 48,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore #7"
+bound = [ 32, 32, 48, 48,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #7"
+bound = [ 48, 32, 64, 48,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #22"
+bound = [ 64, 32, 80, 48,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "lead"
+[[ores.layers]]
+name = "Pasted Layer #1"
+bound = [ 80, 32, 96, 48,]
+blend_mode = "Normal"
+
+
+[[ores]]
+name = "nickel"
+[[ores.layers]]
+name = "Pasted Layer #4"
+bound = [ 96, 32, 112, 48,]
+blend_mode = "Normal"
+
+
+[[ores]]
+name = "osmium"
+[[ores.layers]]
+name = "Ore #13"
+bound = [ 112, 32, 128, 48,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #13"
+bound = [ 128, 32, 144, 48,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #26"
+bound = [ 144, 32, 160, 48,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "quartz"
+[[ores.layers]]
+name = "Ore #19"
+bound = [ 160, 32, 176, 48,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore #8"
+bound = [ 176, 32, 192, 48,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #8"
+bound = [ 192, 32, 208, 48,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #23"
+bound = [ 208, 32, 224, 48,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "redstone"
+[[ores.layers]]
+name = "Ore #5"
+bound = [ 224, 32, 240, 48,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Glow"
+bound = [ 240, 32, 256, 48,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #6"
+bound = [ 0, 48, 16, 64,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #19"
+bound = [ 16, 48, 32, 64,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "silver"
+[[ores.layers]]
+name = "Ore #14"
+bound = [ 32, 48, 48, 64,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore #20"
+bound = [ 48, 48, 64, 64,]
+blend_mode = "Lightness (LCH)"
+
+[[ores.layers]]
+name = "Shading #14"
+bound = [ 64, 48, 80, 64,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #25"
+bound = [ 80, 48, 96, 64,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "sulfur"
+[[ores.layers]]
+name = "Ore #9"
+bound = [ 96, 48, 112, 64,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #9"
+bound = [ 112, 48, 128, 64,]
+blend_mode = "Normal"
+
+
+[[ores]]
+name = "tin"
+[[ores.layers]]
+name = "Ore #15"
+bound = [ 128, 48, 144, 64,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Ore Overflow"
+bound = [ 144, 48, 160, 64,]
+blend_mode = "Overlay"
+
+[[ores.layers]]
+name = "Shading #15"
+bound = [ 160, 48, 176, 64,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Shading #24"
+bound = [ 176, 48, 192, 64,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "uranium"
+[[ores.layers]]
+name = "Ore Base"
+bound = [ 192, 48, 208, 64,]
+blend_mode = "Normal"
+
+[[ores.layers]]
+name = "Shading #10"
+bound = [ 208, 48, 224, 64,]
+blend_mode = "Soft light"
+
+[[ores.layers]]
+name = "Pasted Layer #2"
+bound = [ 224, 48, 240, 64,]
+blend_mode = "Lightness (LCH)"
+
+
+[[ores]]
+name = "zinc"
+[[ores.layers]]
+name = "Pasted Layer #5"
+bound = [ 240, 48, 256, 64,]
+blend_mode = "Normal"
+
+

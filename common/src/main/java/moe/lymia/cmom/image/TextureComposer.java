@@ -12,6 +12,8 @@ public final class TextureComposer {
     public TextureComposer(int x, int y) {
         this.image = new BufferedImage(x, y, BufferedImage.TYPE_4BYTE_ABGR);
         this.gfx = this.image.createGraphics();
+
+        gfx.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
     }
 
     public void composeAlpha(BufferedImage src) {
