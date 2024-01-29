@@ -1,29 +1,19 @@
-import com.github.jengelman.gradle.plugins.shadow.relocation.RelocateClassContext
-import com.github.jengelman.gradle.plugins.shadow.relocation.RelocatePathContext
-import com.github.jengelman.gradle.plugins.shadow.relocation.Relocator
-
-buildscript {
-    repositories {
-        mavenLocal()
-        mavenCentral()
-        google()
-    }
-	dependencies {
-        classpath 'com.guardsquare:proguard-gradle:7.4.1'
-    }
-}
-
 plugins {
 	id "architectury-plugin" version "3.4.151" apply false
 	id 'dev.architectury.loom' version '1.4.380' apply false
 	id 'org.ajoberstar.grgit' version '5.0.0'
 	id 'com.github.johnrengelman.shadow' version "8.1.1"
+	id "io.github.sgtsilvio.gradle.proguard" version "0.6.0"
+	id "scala"
 }
 
 allprojects {
 	apply plugin: "java"
+	apply plugin: "scala"
+	apply plugin: "idea"
 	apply plugin: 'application'
 	apply plugin: 'com.github.johnrengelman.shadow'
+	apply plugin: 'io.github.sgtsilvio.gradle.proguard'
 
 	sourceCompatibility = JavaVersion.VERSION_1_8
 	targetCompatibility = JavaVersion.VERSION_1_8
@@ -52,62 +42,81 @@ allprojects {
 		withSourcesJar()
 	}
 
+	dependencies {
+		implementation "org.scala-lang:scala3-library_3:${rootProject.scala_version}"
+	}
+
+	jar {
+		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+	}
+
 	shadowJar {
 		exclude "META-INF/maven/**"
 		exclude "META-INF/proguard/**"
 		exclude "META-INF/LICENSE.**" // we don't want it in *this* format, even though we want it
+
+		// weird useless resources that get through
 		exclude "org/jdesktop/swingx/**/resources/**"
 		exclude "org/jdesktop/swingx/**/*.gif"
 		exclude "org/jdesktop/swingx/**/*.png"
 		exclude "**/*.gwt.xml"
 
+		// scala
+		exclude "LICENSE"
+		exclude "NOTICE"
+		exclude "rootdoc.txt"
+		exclude "library.properties"
+		exclude "**/*.tasty"
+
+		// actual packages
 		([
 		        "com.github.tommyettinger.",
 		        "com.jhlabs.",
 				"org.jdesktop.",
 				"org.checkerframework.",
+				"scala.",
 		]).each {
 			relocate("${it}", "${project.shadow_prefix}.${it}")
 		}
 	}
 
-	task('proguard', type: proguard.gradle.ProGuardTask) {
-		dependsOn(shadowJar)
+	dependencies {
+		// newest version of proguard that doesn't keep 1MB worth of Scala library for no reason.
+		proguardClasspath("net.sf.proguard:proguard-base:5.1")
+	}
 
-		verbose
-
-		injars shadowJar.archiveFile
-		outjars shadowJar.archiveFile.map {
-			def name = it.getAsFile().getName().replace("-all.jar", "-proguard.jar")
-			project.layout.buildDirectory.file("libs/${name}")
+	task('proguardJar', type: io.github.sgtsilvio.gradle.proguard.ProguardTask) {
+		addInput {
+			classpath.from(tasks.shadowJar)
 		}
+		addOutput {
+			archiveFile.set(base.libsDirectory.file("proguard-temp-${version}.jar"))
+		}
+		// exclude classpath, since we blanket keep everything in our own packages, we don't need the super thing.
+		mappingFile.set(base.libsDirectory.file("${project.name}-${project.version}-mapping.txt"))
 
 		// JVM library jars
-		if (System.getProperty('java.version').startsWith('1.')) {
-			libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+		if (new File("/usr/lib/jvm/java-8-openjdk/jre/lib/").exists()) {
+			addLibrary {classpath.from("/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar") }
 		} else {
-			libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.datatransfer.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.desktop.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.logging.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.naming.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.prefs.jmod"
-			libraryjars "${System.getProperty('java.home')}/jmods/java.sql.jmod"
+			jdkModules.add "java.base"
+			jdkModules.add "java.datatransfer"
+			jdkModules.add "java.desktop"
+			jdkModules.add "java.logging"
+			jdkModules.add "java.naming"
+			jdkModules.add "java.prefs"
+			jdkModules.add "java.sql"
+			jdkModules.add "jdk.unsupported"
 		}
 
-		// Dependency configuration
-		libraryjars(sourceSets.main.runtimeClasspath)
-		dontwarn 'scala.**'
-
-		// Obfuscation configuration
-		keep 'class moe.lymia.**'
-		keepattributes '*Annotation*'
-	    keepattributes 'SourceFile,LineNumberTable'
-		dontobfuscate()
-
-		// Optimization configuration
-		optimizationpasses 5
-		optimizations "!code/simplification/string"
+		rules.addAll(
+				"-dontobfuscate",
+				"-dontoptimize",
+				"-keep class moe.lymia.** { <fields>; <methods>; }",
+				"-keepattributes Signature,InnerClasses,SourceFile,LineNumberTable,*Annotation*",
+				"-dontwarn **",
+				"-skipnonpubliclibraryclasses",
+		)
 	}
 }
 

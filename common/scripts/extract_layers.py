@@ -2,7 +2,7 @@
 
 import PIL.Image
 import PIL.ImageOps
-import toml
+import json
 from gimpformats.GimpLayer import GimpLayer
 from gimpformats.gimpXcfDocument import GimpDocument
 
@@ -79,4 +79,4 @@ ore_manifest = {
     "ores": ore_info,
 }
 out_image.save(f"{out_path}/{out_name}")
-open(f"{out_path}/ore_overlays.toml", "w").write(toml.dumps(ore_manifest))
+open(f"{out_path}/ore_overlays.json", "w").write(json.dumps(ore_manifest, indent = True))
