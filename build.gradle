@@ -1,3 +1,18 @@
+import com.github.jengelman.gradle.plugins.shadow.relocation.RelocateClassContext
+import com.github.jengelman.gradle.plugins.shadow.relocation.RelocatePathContext
+import com.github.jengelman.gradle.plugins.shadow.relocation.Relocator
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        google()
+    }
+	dependencies {
+        classpath 'com.guardsquare:proguard-gradle:7.4.1'
+    }
+}
+
 plugins {
 	id "architectury-plugin" version "3.4.151" apply false
 	id 'dev.architectury.loom' version '1.4.380' apply false
@@ -17,8 +32,15 @@ allprojects {
 	group = project.maven_group
 
 	repositories {
+		mavenCentral()
 		maven {
 			url "https://maven.architectury.dev/"
+		}
+		maven {
+			url "https://cursemaven.com"
+			content {
+				includeGroup "curse.maven"
+			}
 		}
 	}
 
@@ -28,6 +50,64 @@ allprojects {
 
 	java {
 		withSourcesJar()
+	}
+
+	shadowJar {
+		exclude "META-INF/maven/**"
+		exclude "META-INF/proguard/**"
+		exclude "META-INF/LICENSE.**" // we don't want it in *this* format, even though we want it
+		exclude "org/jdesktop/swingx/**/resources/**"
+		exclude "org/jdesktop/swingx/**/*.gif"
+		exclude "org/jdesktop/swingx/**/*.png"
+		exclude "**/*.gwt.xml"
+
+		([
+		        "com.github.tommyettinger.",
+		        "com.jhlabs.",
+				"org.jdesktop.",
+				"org.checkerframework.",
+		]).each {
+			relocate("${it}", "${project.shadow_prefix}.${it}")
+		}
+	}
+
+	task('proguard', type: proguard.gradle.ProGuardTask) {
+		dependsOn(shadowJar)
+
+		verbose
+
+		injars shadowJar.archiveFile
+		outjars shadowJar.archiveFile.map {
+			def name = it.getAsFile().getName().replace("-all.jar", "-proguard.jar")
+			project.layout.buildDirectory.file("libs/${name}")
+		}
+
+		// JVM library jars
+		if (System.getProperty('java.version').startsWith('1.')) {
+			libraryjars "${System.getProperty('java.home')}/lib/rt.jar"
+		} else {
+			libraryjars "${System.getProperty('java.home')}/jmods/java.base.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.datatransfer.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.desktop.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.logging.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.naming.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.prefs.jmod"
+			libraryjars "${System.getProperty('java.home')}/jmods/java.sql.jmod"
+		}
+
+		// Dependency configuration
+		libraryjars(sourceSets.main.runtimeClasspath)
+		dontwarn 'scala.**'
+
+		// Obfuscation configuration
+		keep 'class moe.lymia.**'
+		keepattributes '*Annotation*'
+	    keepattributes 'SourceFile,LineNumberTable'
+		dontobfuscate()
+
+		// Optimization configuration
+		optimizationpasses 5
+		optimizations "!code/simplification/string"
 	}
 }
 
