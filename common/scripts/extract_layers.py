@@ -53,7 +53,7 @@ def push_image(i, img):
     return box
 
 idx = 0
-ore_info = []
+ore_info = {}
 for ore in kinds:
     ore_name, layers = ore
     layer_info = []
@@ -63,20 +63,22 @@ for ore in kinds:
 
         layer_info.append({
             "name": layer[0],
+            "mode": "Layer",
             "bound": image_bound,
             "blend_mode": layer[2],
         })
-    ore_info.append({
-        "name": ore_name,
-        "layers": layer_info,
+    layer_info.append({
+        "mode": "External",
+        "layer": "base_layer"
     })
+    ore_info[ore_name] = layer_info
 
 out_path = "src/main/resources/assets/colorfulmagicaloremod/texture_compositor/"
-out_name = "ore_overlays.png"
+out_name = "overlays.png"
 ore_manifest = {
     "out_name": out_name,
     "image_size": (out_image.width, out_image.height),
-    "ores": ore_info,
+    "layers": ore_info,
 }
 out_image.save(f"{out_path}/{out_name}")
-open(f"{out_path}/ore_overlays.json", "w").write(json.dumps(ore_manifest, indent = True))
+open(f"{out_path}/overlays.json", "w").write(json.dumps(ore_manifest, indent = True))

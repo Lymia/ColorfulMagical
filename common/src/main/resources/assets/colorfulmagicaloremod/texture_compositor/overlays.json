@@ -1,0 +1,839 @@
+{
+ "out_name": "overlays.png",
+ "image_size": [
+  256,
+  64
+ ],
+ "layers": {
+  "ore:arcane": [
+   {
+    "name": "Ore #12",
+    "mode": "Layer",
+    "bound": [
+     0,
+     0,
+     16,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #12",
+    "mode": "Layer",
+    "bound": [
+     16,
+     0,
+     32,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:coal": [
+   {
+    "name": "Ore #3",
+    "mode": "Layer",
+    "bound": [
+     32,
+     0,
+     48,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #3",
+    "mode": "Layer",
+    "bound": [
+     48,
+     0,
+     64,
+     16
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #20",
+    "mode": "Layer",
+    "bound": [
+     64,
+     0,
+     80,
+     16
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #21",
+    "mode": "Layer",
+    "bound": [
+     80,
+     0,
+     96,
+     16
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:cobalt": [
+   {
+    "name": "Ore #16",
+    "mode": "Layer",
+    "bound": [
+     96,
+     0,
+     112,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore Remanants copy",
+    "mode": "Layer",
+    "bound": [
+     112,
+     0,
+     128,
+     16
+    ],
+    "blend_mode": "Hard light"
+   },
+   {
+    "name": "Ore Remanants",
+    "mode": "Layer",
+    "bound": [
+     128,
+     0,
+     144,
+     16
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #16",
+    "mode": "Layer",
+    "bound": [
+     144,
+     0,
+     160,
+     16
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:copper": [
+   {
+    "name": "Ore #4",
+    "mode": "Layer",
+    "bound": [
+     160,
+     0,
+     176,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #4",
+    "mode": "Layer",
+    "bound": [
+     176,
+     0,
+     192,
+     16
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Smoothing",
+    "mode": "Layer",
+    "bound": [
+     192,
+     0,
+     208,
+     16
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:diamond": [
+   {
+    "name": "Ore #2",
+    "mode": "Layer",
+    "bound": [
+     208,
+     0,
+     224,
+     16
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #2",
+    "mode": "Layer",
+    "bound": [
+     224,
+     0,
+     240,
+     16
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #17",
+    "mode": "Layer",
+    "bound": [
+     240,
+     0,
+     256,
+     16
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:emerald": [
+   {
+    "name": "Ore #6",
+    "mode": "Layer",
+    "bound": [
+     0,
+     16,
+     16,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Glow #2",
+    "mode": "Layer",
+    "bound": [
+     16,
+     16,
+     32,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #5",
+    "mode": "Layer",
+    "bound": [
+     32,
+     16,
+     48,
+     32
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #18",
+    "mode": "Layer",
+    "bound": [
+     48,
+     16,
+     64,
+     32
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:fluorite": [
+   {
+    "name": "Ore #11",
+    "mode": "Layer",
+    "bound": [
+     64,
+     16,
+     80,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #11",
+    "mode": "Layer",
+    "bound": [
+     80,
+     16,
+     96,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:geode": [
+   {
+    "name": "Ore #21",
+    "mode": "Layer",
+    "bound": [
+     96,
+     16,
+     112,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #27",
+    "mode": "Layer",
+    "bound": [
+     112,
+     16,
+     128,
+     32
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Pasted Layer #3",
+    "mode": "Layer",
+    "bound": [
+     128,
+     16,
+     144,
+     32
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:gold": [
+   {
+    "name": "Ore #1",
+    "mode": "Layer",
+    "bound": [
+     144,
+     16,
+     160,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore #17",
+    "mode": "Layer",
+    "bound": [
+     160,
+     16,
+     176,
+     32
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #1",
+    "mode": "Layer",
+    "bound": [
+     176,
+     16,
+     192,
+     32
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Pasted Layer #6",
+    "mode": "Layer",
+    "bound": [
+     192,
+     16,
+     208,
+     32
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:iron": [
+   {
+    "name": "Ore",
+    "mode": "Layer",
+    "bound": [
+     208,
+     16,
+     224,
+     32
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore copy",
+    "mode": "Layer",
+    "bound": [
+     224,
+     16,
+     240,
+     32
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading",
+    "mode": "Layer",
+    "bound": [
+     240,
+     16,
+     256,
+     32
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Smoothing copy",
+    "mode": "Layer",
+    "bound": [
+     0,
+     32,
+     16,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:lapis": [
+   {
+    "name": "Ore #18",
+    "mode": "Layer",
+    "bound": [
+     16,
+     32,
+     32,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore #7",
+    "mode": "Layer",
+    "bound": [
+     32,
+     32,
+     48,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #7",
+    "mode": "Layer",
+    "bound": [
+     48,
+     32,
+     64,
+     48
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #22",
+    "mode": "Layer",
+    "bound": [
+     64,
+     32,
+     80,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:lead": [
+   {
+    "name": "Pasted Layer #1",
+    "mode": "Layer",
+    "bound": [
+     80,
+     32,
+     96,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:nickel": [
+   {
+    "name": "Pasted Layer #4",
+    "mode": "Layer",
+    "bound": [
+     96,
+     32,
+     112,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:osmium": [
+   {
+    "name": "Ore #13",
+    "mode": "Layer",
+    "bound": [
+     112,
+     32,
+     128,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #13",
+    "mode": "Layer",
+    "bound": [
+     128,
+     32,
+     144,
+     48
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #26",
+    "mode": "Layer",
+    "bound": [
+     144,
+     32,
+     160,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:quartz": [
+   {
+    "name": "Ore #19",
+    "mode": "Layer",
+    "bound": [
+     160,
+     32,
+     176,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore #8",
+    "mode": "Layer",
+    "bound": [
+     176,
+     32,
+     192,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #8",
+    "mode": "Layer",
+    "bound": [
+     192,
+     32,
+     208,
+     48
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #23",
+    "mode": "Layer",
+    "bound": [
+     208,
+     32,
+     224,
+     48
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:redstone": [
+   {
+    "name": "Ore #5",
+    "mode": "Layer",
+    "bound": [
+     224,
+     32,
+     240,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Glow",
+    "mode": "Layer",
+    "bound": [
+     240,
+     32,
+     256,
+     48
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #6",
+    "mode": "Layer",
+    "bound": [
+     0,
+     48,
+     16,
+     64
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #19",
+    "mode": "Layer",
+    "bound": [
+     16,
+     48,
+     32,
+     64
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:silver": [
+   {
+    "name": "Ore #14",
+    "mode": "Layer",
+    "bound": [
+     32,
+     48,
+     48,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore #20",
+    "mode": "Layer",
+    "bound": [
+     48,
+     48,
+     64,
+     64
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "name": "Shading #14",
+    "mode": "Layer",
+    "bound": [
+     64,
+     48,
+     80,
+     64
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #25",
+    "mode": "Layer",
+    "bound": [
+     80,
+     48,
+     96,
+     64
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:sulfur": [
+   {
+    "name": "Ore #9",
+    "mode": "Layer",
+    "bound": [
+     96,
+     48,
+     112,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #9",
+    "mode": "Layer",
+    "bound": [
+     112,
+     48,
+     128,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:tin": [
+   {
+    "name": "Ore #15",
+    "mode": "Layer",
+    "bound": [
+     128,
+     48,
+     144,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Ore Overflow",
+    "mode": "Layer",
+    "bound": [
+     144,
+     48,
+     160,
+     64
+    ],
+    "blend_mode": "Overlay"
+   },
+   {
+    "name": "Shading #15",
+    "mode": "Layer",
+    "bound": [
+     160,
+     48,
+     176,
+     64
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Shading #24",
+    "mode": "Layer",
+    "bound": [
+     176,
+     48,
+     192,
+     64
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:uranium": [
+   {
+    "name": "Ore Base",
+    "mode": "Layer",
+    "bound": [
+     192,
+     48,
+     208,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "name": "Shading #10",
+    "mode": "Layer",
+    "bound": [
+     208,
+     48,
+     224,
+     64
+    ],
+    "blend_mode": "Soft light"
+   },
+   {
+    "name": "Pasted Layer #2",
+    "mode": "Layer",
+    "bound": [
+     224,
+     48,
+     240,
+     64
+    ],
+    "blend_mode": "Lightness (LCH)"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ],
+  "ore:zinc": [
+   {
+    "name": "Pasted Layer #5",
+    "mode": "Layer",
+    "bound": [
+     240,
+     48,
+     256,
+     64
+    ],
+    "blend_mode": "Normal"
+   },
+   {
+    "mode": "External",
+    "layer": "base_layer"
+   }
+  ]
+ }
+}
