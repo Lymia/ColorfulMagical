@@ -21,6 +21,8 @@ final class TextureComposer(x: Int, y: Int) {
         gfx.drawImage(img, 0, 0, img.getWidth, img.getHeight, x, y, x + w, y + h, null)
     }
   }
+
+  def getImage: BufferedImage = image
 }
 
 enum TextureSource {

@@ -78,6 +78,7 @@ out_name = "overlays.png"
 ore_manifest = {
     "out_name": out_name,
     "image_size": (out_image.width, out_image.height),
+    "texture_size": (project.width, project.height),
     "layers": ore_info,
 }
 out_image.save(f"{out_path}/{out_name}")

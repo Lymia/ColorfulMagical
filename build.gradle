@@ -68,19 +68,6 @@ allprojects {
 		exclude "rootdoc.txt"
 		exclude "library.properties"
 		exclude "**/*.tasty"
-
-		// actual packages
-		([
-				"com.fasterxml.",
-		        "com.github.tommyettinger.",
-		        "com.jhlabs.",
-				"play.",
-				"org.checkerframework.",
-				"org.jdesktop.",
-				"scala.",
-		]).each {
-			relocate("${it}", "${project.shadow_prefix}.${it}")
-		}
 	}
 
 	dependencies {
@@ -113,12 +100,17 @@ allprojects {
 		}
 
 		rules.addAll(
-				"-dontobfuscate",
-				"-dontoptimize",
-				"-keep class moe.lymia.** { <fields>; <methods>; }",
-				"-keepattributes Signature,InnerClasses,SourceFile,LineNumberTable,*Annotation*",
+				"-verbose",
 				"-dontwarn **",
 				"-skipnonpubliclibraryclasses",
+
+				"-keep class moe.lymia.** { <methods>; }",
+				"-keep class moe.lymia.**.api.** { <fields>; <methods>; }",
+				"-keepattributes SourceFile,LineNumberTable,*Annotation*",
+
+				"-repackageclasses ${project.shadow_prefix}",
+
+				"-dontoptimize",
 		)
 	}
 }

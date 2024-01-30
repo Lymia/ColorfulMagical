@@ -4,6 +4,10 @@
   256,
   64
  ],
+ "texture_size": [
+  16,
+  16
+ ],
  "layers": {
   "ore:arcane": [
    {
