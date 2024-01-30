@@ -12,4 +12,6 @@ pluginManagement {
 
 }
 
-include "common", "forge-1.16"
+include "ColorfulMagicalLib"
+include "CMOreMod-common", "CMOreMod-forge-1.16"
+

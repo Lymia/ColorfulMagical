@@ -1,140 +1,157 @@
 plugins {
-	id "architectury-plugin" version "3.4.151" apply false
-	id 'dev.architectury.loom' version '1.4.380' apply false
-	id 'org.ajoberstar.grgit' version '5.0.0'
-	id 'com.github.johnrengelman.shadow' version "8.1.1"
-	id "io.github.sgtsilvio.gradle.proguard" version "0.6.0"
-	id "scala"
+    id "architectury-plugin" version "3.4.151" apply false
+    id 'dev.architectury.loom' version '1.4.380' apply false
+    id 'org.ajoberstar.grgit' version '5.0.0'
+    id 'com.github.johnrengelman.shadow' version "8.1.1"
+    id "io.github.sgtsilvio.gradle.proguard" version "0.6.0"
+    id "scala"
 }
 
 allprojects {
-	apply plugin: "java"
-	apply plugin: "scala"
-	apply plugin: "idea"
-	apply plugin: 'application'
-	apply plugin: 'com.github.johnrengelman.shadow'
-	apply plugin: 'io.github.sgtsilvio.gradle.proguard'
+    apply plugin: "java"
+    apply plugin: "scala"
+    apply plugin: "idea"
+    apply plugin: 'application'
+    apply plugin: 'com.github.johnrengelman.shadow'
+    apply plugin: 'io.github.sgtsilvio.gradle.proguard'
 
-	sourceCompatibility = JavaVersion.VERSION_1_8
-	targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 
-	version = "${project.mod_version}${getVersionMetadata()}+mc${project.minecraft_version}"
-	group = project.maven_group
+    version = "${project.mod_version}${getVersionMetadata()}+mc${project.minecraft_version}"
+    group = project.maven_group
 
-	repositories {
-		mavenCentral()
-		maven {
-			url "https://maven.architectury.dev/"
-		}
-		maven {
-			url "https://cursemaven.com"
-			content {
-				includeGroup "curse.maven"
-			}
-		}
-	}
+    repositories {
+        mavenCentral()
+        maven {
+            url "https://maven.architectury.dev/"
+        }
+        maven {
+            url "https://cursemaven.com"
+            content {
+                includeGroup "curse.maven"
+            }
+        }
+    }
 
-	tasks.withType(JavaCompile).configureEach {
-		it.options.encoding = "UTF-8"
-	}
+    tasks.withType(JavaCompile).configureEach {
+        it.options.encoding = "UTF-8"
+    }
 
-	java {
-		withSourcesJar()
-	}
+    java {
+        withSourcesJar()
+    }
 
-	dependencies {
-		implementation "org.scala-lang:scala3-library_3:${rootProject.scala_version}"
-	}
+    dependencies {
+        implementation "org.scala-lang:scala3-library_3:${rootProject.scala_version}"
+    }
 
-	jar {
-		duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-	}
+    jar {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
 
-	shadowJar {
-		exclude "META-INF/maven/**"
-		exclude "META-INF/proguard/**"
-		exclude "META-INF/versions/**"
-		exclude "META-INF/services/**"
+    shadowJar {
+        exclude "META-INF/maven/**"
+        exclude "META-INF/proguard/**"
+        exclude "META-INF/versions/**"
+        exclude "META-INF/services/**"
 
-		// weird useless resources that get through
-		exclude "org/jdesktop/swingx/**/resources/**"
-		exclude "org/jdesktop/swingx/**/*.gif"
-		exclude "org/jdesktop/swingx/**/*.png"
-		exclude "**/*.gwt.xml"
+        // weird useless resources that get through
+        exclude "org/jdesktop/swingx/**/resources/**"
+        exclude "org/jdesktop/swingx/**/*.gif"
+        exclude "org/jdesktop/swingx/**/*.png"
+        exclude "**/*.gwt.xml"
 
-		// scala
-		exclude "LICENSE"
-		exclude "NOTICE"
-		exclude "rootdoc.txt"
-		exclude "library.properties"
-		exclude "**/*.tasty"
-	}
+        // scala
+        exclude "LICENSE"
+        exclude "NOTICE"
+        exclude "rootdoc.txt"
+        exclude "library.properties"
+        exclude "**/*.tasty"
 
-	dependencies {
-		// newest version of proguard that doesn't keep 1MB worth of Scala library for no reason.
-		proguardClasspath("com.guardsquare:proguard-base:7.4.1")
-	}
+        // shadow ColorfulMagicalLib
+        relocate "moe.lymia.colorfulmagical.", "${project.shadow_prefix}.cmlib."
+    }
 
-	task('proguardJar', type: io.github.sgtsilvio.gradle.proguard.ProguardTask) {
-		addInput {
-			classpath.from(tasks.shadowJar)
-		}
-		addOutput {
-			archiveFile.set(base.libsDirectory.file("proguard-temp-${version}.jar"))
-		}
+    dependencies {
+        // newest version of proguard that doesn't keep 1MB worth of Scala library for no reason.
+        proguardClasspath("com.guardsquare:proguard-base:7.4.1")
+    }
+
+    task('proguardJar', type: io.github.sgtsilvio.gradle.proguard.ProguardTask) {
+        addInput {
+            classpath.from(tasks.shadowJar)
+        }
+        addOutput {
+            archiveFile.set(base.libsDirectory.file("proguard-temp-${version}.jar"))
+        }
         addLibrary {
             classpath.from(sourceSets.main.compileClasspath)
         }
-		mappingFile.set(base.libsDirectory.file("${project.name}-${project.version}-mapping.txt"))
+        mappingFile.set(base.libsDirectory.file("${project.name}-${project.version}-mapping.txt"))
 
-		// JVM library jars
-		if (new File("/usr/lib/jvm/java-8-openjdk/jre/lib/").exists()) {
-			addLibrary {classpath.from("/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar") }
-		} else {
-			jdkModules.add "java.base"
-			jdkModules.add "java.datatransfer"
-			jdkModules.add "java.desktop"
-			jdkModules.add "java.logging"
-			jdkModules.add "java.naming"
-			jdkModules.add "java.prefs"
-			jdkModules.add "java.sql"
-			jdkModules.add "jdk.unsupported"
-		}
+        // JVM library jars
+        if (new File("/usr/lib/jvm/java-8-openjdk/jre/lib/").exists()) {
+            addLibrary { classpath.from("/usr/lib/jvm/java-8-openjdk/jre/lib/rt.jar") }
+        } else {
+            jdkModules.add "java.base"
+            jdkModules.add "java.datatransfer"
+            jdkModules.add "java.desktop"
+            jdkModules.add "java.logging"
+            jdkModules.add "java.naming"
+            jdkModules.add "java.prefs"
+            jdkModules.add "java.sql"
+            jdkModules.add "jdk.unsupported"
+        }
 
-		rules.addAll(
-				"-verbose",
-				"-dontwarn **",
-				"-skipnonpubliclibraryclasses",
+        rules.addAll(
+                "-verbose",
+                "-dontwarn **",
+                "-skipnonpubliclibraryclasses",
 
-				"-keep class moe.lymia.** { <methods>; }",
-				"-keep class moe.lymia.**.api.** { <fields>; <methods>; }",
-				"-keepattributes SourceFile,LineNumberTable,*Annotation*",
+                // Minecraft mod entry points
+                "-keep @net.minecraftforge.fml.common.Mod class **", // Keep Forge entry points
+                "-keep class moe.lymia.**.mixin.** { <methods>; <fields>; }", // Do not fuck with mixins at all
 
-				"-repackageclasses ${project.shadow_prefix}",
+                // Main-Class entry points
+                "-if class moe.lymia.** { public static void main(java.lang.String[]); }",
+                "-keep class moe.lymia.<1> { public static void main(java.lang.String[]); }",
 
+                // API Entry Points
+                "-keep class moe.lymia.**.api.** { public <fields>; public <methods>; protected <fields>; protected <methods>; }",
+
+                // Keep some names to make stacktraces not completely unreadable
+                "-keepnames class moe.lymia.**",
+                "-keepclassmembernames class ** { public <methods>; }",
+                "-keepattributes SourceFile,LineNumberTable,*Annotation*",
+
+                // Obfuscation
+                "-repackageclasses ${project.shadow_prefix}",
+
+                // Optimization
                 "-optimizationpasses 5",
                 "-optimizations !code/simplification/*", // something in that optimization causes an error in proguard
-				"-optimizeaggressively",
-		)
-	}
+                "-optimizeaggressively",
+        )
+    }
 }
 
 def getVersionMetadata() {
-	// CI builds only
-	if (grgit != null) {
-		def head = grgit.head()
+    // CI builds only
+    if (grgit != null) {
+        def head = grgit.head()
 
-		if (grgit.tag.list().findAll { it.commit == head}.isEmpty()) {
-			def id = head.abbreviatedId
-			if (!grgit.status().clean) {
-				id += ".dirty"
-			}
-			return "-r${id}"
-		} else {
-			return ""
-		}
-	}
+        if (grgit.tag.list().findAll { it.commit == head }.isEmpty()) {
+            def id = head.abbreviatedId
+            if (!grgit.status().clean) {
+                id += ".dirty"
+            }
+            return "-r${id}"
+        } else {
+            return ""
+        }
+    }
 
-	// No tracking information could be found about the build
-	return "-unknown"
+    // No tracking information could be found about the build
+    return "-unknown"
 }
