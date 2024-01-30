@@ -72,7 +72,7 @@ allprojects {
 
 	dependencies {
 		// newest version of proguard that doesn't keep 1MB worth of Scala library for no reason.
-		proguardClasspath("net.sf.proguard:proguard-base:5.1")
+		proguardClasspath("com.guardsquare:proguard-base:7.4.1")
 	}
 
 	task('proguardJar', type: io.github.sgtsilvio.gradle.proguard.ProguardTask) {
@@ -82,7 +82,9 @@ allprojects {
 		addOutput {
 			archiveFile.set(base.libsDirectory.file("proguard-temp-${version}.jar"))
 		}
-		// exclude classpath, since we blanket keep everything in our own packages, we don't need the super thing.
+        addLibrary {
+            classpath.from(sourceSets.main.compileClasspath)
+        }
 		mappingFile.set(base.libsDirectory.file("${project.name}-${project.version}-mapping.txt"))
 
 		// JVM library jars
@@ -110,7 +112,9 @@ allprojects {
 
 				"-repackageclasses ${project.shadow_prefix}",
 
-				"-dontoptimize",
+                "-optimizationpasses 5",
+                "-optimizations !code/simplification/*", // something in that optimization causes an error in proguard
+				"-optimizeaggressively",
 		)
 	}
 }

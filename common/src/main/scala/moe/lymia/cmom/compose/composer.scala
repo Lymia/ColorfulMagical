@@ -1,25 +1,31 @@
 package moe.lymia.cmom.compose
 
+import com.jhlabs.composite.*
 import moe.lymia.cmom.compose.TextureSource.SpriteSheetLocation
-import org.jdesktop.swingx.graphics.BlendComposite
 
 import java.awt.*
 import java.awt.image.BufferedImage
+import java.io.File
+import javax.imageio.ImageIO
 
 final class TextureComposer(x: Int, y: Int) {
-  private val image: BufferedImage = new BufferedImage(x, y, BufferedImage.TYPE_4BYTE_ABGR)
-  private val gfx: Graphics2D      = this.image.createGraphics()
+  private val image: BufferedImage = new BufferedImage(x, y, BufferedImage.TYPE_INT_ARGB)
 
-  gfx.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR)
-
+  private var i = 0
   def paste(src: TextureSource, mode: BlendingMode = BlendingMode.Alpha): Unit = {
+    val gfx = this.image.createGraphics()
+    gfx.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR)
     gfx.setComposite(mode.compositor)
     src match {
       case TextureSource.TextureData(img) =>
+        println((i, mode, gfx.getComposite, img))
         gfx.drawImage(img, 0, 0, image.getWidth, image.getHeight, null)
-      case SpriteSheetLocation(img, x, y, w, h) =>
-        gfx.drawImage(img, 0, 0, img.getWidth, img.getHeight, x, y, x + w, y + h, null)
+      case SpriteSheetLocation(img, x, y, x1, y1) =>
+        println((i, x, y, x1, y1, mode, gfx.getComposite, img))
+        gfx.drawImage(img, 0, 0, image.getWidth, image.getHeight, x, y, x1, y1, null)
     }
+    ImageIO.write(image, "png", new File(f"layer_$i.png"))
+    i += 1
   }
 
   def getImage: BufferedImage = image
@@ -27,7 +33,7 @@ final class TextureComposer(x: Int, y: Int) {
 
 enum TextureSource {
   case TextureData(data: BufferedImage)
-  case SpriteSheetLocation(data: BufferedImage, x: Int, y: Int, w: Int, h: Int)
+  case SpriteSheetLocation(data: BufferedImage, x: Int, y: Int, x1: Int, y1: Int)
 }
 
 enum BlendingMode {
@@ -36,23 +42,23 @@ enum BlendingMode {
   case Dodge, Burn, HardLight, SoftLight, Overlay
 
   lazy val compositor: Composite = this match {
-    case Alpha          => AlphaComposite.getInstance(AlphaComposite.SRC_OVER)
-    case Multiply       => BlendComposite.Multiply
-    case Screen         => BlendComposite.Screen
-    case Difference     => BlendComposite.Difference
-    case Addition       => BlendComposite.Add
-    case Subtract       => BlendComposite.Subtract
-    case DarkenOnly     => BlendComposite.Darken
-    case LightenOnly    => BlendComposite.Lighten
+    case Alpha          => AlphaComposite.SrcOver
+    case Multiply       => new MultiplyComposite(1)
+    case Screen         => new ScreenComposite(1)
+    case Difference     => new DifferenceComposite(1)
+    case Addition       => new AddComposite(1)
+    case Subtract       => new SubtractComposite(1)
+    case DarkenOnly     => new DarkenComposite(1)
+    case LightenOnly    => new LightenComposite(1)
     case OklabHue       => GimpComposite(GimpBlendingMode.OklabHue)
     case OklabChroma    => GimpComposite(GimpBlendingMode.OklabChroma)
     case OklabColor     => GimpComposite(GimpBlendingMode.OklabColor)
     case OklabLightness => GimpComposite(GimpBlendingMode.OklabLightness)
-    case Dodge          => BlendComposite.ColorDodge
-    case Burn           => BlendComposite.ColorBurn
-    case HardLight      => BlendComposite.HardLight
-    case SoftLight      => BlendComposite.SoftLight
-    case Overlay        => BlendComposite.Overlay
+    case Dodge          => new DodgeComposite(1)
+    case Burn           => new BurnComposite(1)
+    case HardLight      => new HardLightComposite(1)
+    case SoftLight      => new SoftLightComposite(1)
+    case Overlay        => new OverlayComposite(1)
   }
 }
 object BlendingMode {

@@ -104,7 +104,7 @@ class LoadedManifest(ctx: AssetSource, manifest: OverlayManifest) {
               )
             case OverlayElement.External(name) =>
               LoadedElement.External(name)
-          },
+          }.reverse,
           manifest.textureSize
         )
       )

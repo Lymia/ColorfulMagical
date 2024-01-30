@@ -1,6 +1,6 @@
 dependencies {
     implementation 'com.github.tommyettinger:colorful-pure:0.8.5'
-    implementation 'org.swinglabs:swingx:1.6.1'
+    implementation 'com.jhlabs:filters:2.0.235'
 
     // json support - this is not most recent version, but most recent version that supports Java 8
     implementation 'com.github.plokhotnyuk.jsoniter-scala:jsoniter-scala-core_3:2.13.5'

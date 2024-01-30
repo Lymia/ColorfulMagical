@@ -7,21 +7,24 @@ import java.awt.image.*
 import java.awt.{Composite, CompositeContext, RenderingHints}
 
 private object ColorBlend {
-  private def lerp(a: Float, b: Float, f: Float): Float = a * (1.0f - f) + (b * f)
+  private inline def argbToRgba(a: Int): Int = Integer.rotateLeft(a, 8)
+  private inline def rgbaToArgb(a: Int): Int = Integer.rotateRight(a, 8)
+  private inline def lerp(a: Float, b: Float, f: Float): Float = a * (1.0f - f) + (b * f)
+
   private def lerpRgb(rgbAInt: Int, rgbB: Float, f: Float): Int = {
-    val rgbA = RgbTools.fromRGBA8888(rgbAInt)
+    val rgbA = RgbTools.fromRGBA8888(argbToRgba(rgbAInt))
     val out = RgbTools.fromRGBA(
       lerp(RgbTools.red(rgbA), RgbTools.red(rgbB), f),
       lerp(RgbTools.green(rgbA), RgbTools.green(rgbB), f),
       lerp(RgbTools.blue(rgbA), RgbTools.blue(rgbB), f),
       RgbTools.alpha(rgbA)
     )
-    RgbTools.toRGBA8888(out)
+    rgbaToArgb(RgbTools.toRGBA8888(out))
   }
 
   def oklabTransferHue(src: Int, dst: Int): Int = {
-    val srcHsl = OklabTools.fromRGBA8888(src)
-    val dstHsl = OklabTools.fromRGBA8888(src)
+    val srcHsl = OklabTools.fromRGBA8888(argbToRgba(src))
+    val dstHsl = OklabTools.fromRGBA8888(argbToRgba(dst))
     val oklab = OklabTools.oklabByHCL(
       OklabTools.oklabHue(srcHsl),
       OklabTools.chroma(dstHsl),
@@ -31,19 +34,19 @@ private object ColorBlend {
     lerpRgb(src, OklabTools.toRGBA(oklab), OklabTools.alpha(dstHsl))
   }
   def oklabTransferChroma(src: Int, dst: Int): Int = {
-    val srcHsl = OklabTools.fromRGBA8888(src)
-    val dstHsl = OklabTools.fromRGBA8888(src)
+    val srcHsl = OklabTools.fromRGBA8888(argbToRgba(src))
+    val dstHsl = OklabTools.fromRGBA8888(argbToRgba(dst))
     val oklab = OklabTools.oklabByHCL(
       OklabTools.oklabHue(dstHsl),
       lerp(OklabTools.chroma(dstHsl), OklabTools.chroma(srcHsl), OklabTools.alpha(srcHsl)),
       OklabTools.oklabLightness(dstHsl),
       OklabTools.alpha(dstHsl)
     )
-    OklabTools.toRGBA8888(oklab)
+    rgbaToArgb(OklabTools.toRGBA8888(oklab))
   }
   def oklabTransferColor(src: Int, dst: Int): Int = {
-    val srcHsl = OklabTools.fromRGBA8888(src)
-    val dstHsl = OklabTools.fromRGBA8888(src)
+    val srcHsl = OklabTools.fromRGBA8888(argbToRgba(src))
+    val dstHsl = OklabTools.fromRGBA8888(argbToRgba(dst))
     val oklab = OklabTools.oklabByHCL(
       OklabTools.oklabHue(srcHsl),
       OklabTools.chroma(srcHsl),
@@ -53,15 +56,15 @@ private object ColorBlend {
     lerpRgb(src, OklabTools.toRGBA(oklab), OklabTools.alpha(dstHsl))
   }
   def oklabTransferLightness(src: Int, dst: Int): Int = {
-    val srcHsl = OklabTools.fromRGBA8888(src)
-    val dstHsl = OklabTools.fromRGBA8888(src)
-    val oklab = OklabTools.oklabByHCL(
+    val srcHsl = OklabTools.fromRGBA8888(argbToRgba(src))
+    val dstHsl = OklabTools.fromRGBA8888(argbToRgba(dst))
+    val oklab = OklabTools.oklabByHSL(
       OklabTools.oklabHue(dstHsl),
-      OklabTools.chroma(dstHsl),
+      OklabTools.oklabSaturation(dstHsl),
       lerp(OklabTools.oklabLightness(dstHsl), OklabTools.oklabLightness(srcHsl), OklabTools.alpha(srcHsl)),
       OklabTools.alpha(dstHsl)
     )
-    OklabTools.toRGBA8888(oklab)
+    rgbaToArgb(OklabTools.toRGBA8888(oklab))
   }
 }
 
